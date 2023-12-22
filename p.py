@@ -1,7 +1,4 @@
 import pygame
-import pygame.draw
-import pygame.image
-import pygame.mouse
 import statem
 
 

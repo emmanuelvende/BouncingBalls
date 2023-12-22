@@ -11,30 +11,28 @@ class State:
     def click(self, screen):
         pass
 
-    def get_next_state(self):
+    def next_state(self):
         pass
 
 
-class PrepareBallPosState(State):
+class StateSettingPos(State):
     def idle(self, screen):
         RED = 255, 0, 0
-        w, h = screen.get_size()
-        r = (w**2 + h**2) ** 0.5 / 100
+        r = 5
         x, y = pygame.mouse.get_pos()
         pygame.draw.circle(screen, RED, (x, y), r)
 
     def click(self, screen):
-        self.context.transition_to_next_state()
+        self.context.next_state()
 
-    def get_next_state(self):
-        return PrepareBallSpeedState(self.context)
+    def next_state(self):
+        return StateSettingSpeed(self.context)
 
 
-class PrepareBallSpeedState(State):
+class StateSettingSpeed(State):
     def idle(self, screen):
         YELLOW = (255, 255, 0)
-        w, h = screen.get_size()
-        r = (w**2 + h**2) ** 0.5 / 100
+        r = 5
         x, y = pygame.mouse.get_pos()
         pygame.draw.circle(screen, YELLOW, (x, y), r)
 
@@ -45,7 +43,7 @@ class PrepareBallSpeedState(State):
 
 class Context:
     def __init__(self):
-        self.state = PrepareBallPosState(self)
+        self.state = StateSettingPos(self)
 
     def idle(self, screen):
         self.state.idle(screen)
@@ -53,5 +51,5 @@ class Context:
     def click(self, screen):
         self.state.click(screen)
 
-    def go_to_next_state(self):
-        self.state = self.state.get_next_state()
+    def next_state(self):
+        self.state = self.state.next_state()

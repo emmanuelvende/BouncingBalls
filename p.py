@@ -1,6 +1,6 @@
 import pygame
 import statem
-
+import ball
 
 def main():
     pygame.init()
@@ -9,7 +9,9 @@ def main():
     screen = pygame.display.set_mode((w, h))
     clock = pygame.time.Clock()
 
-    context = statem.Context()
+
+    the_ball = ball.Ball()
+    context = statem.Context(the_ball)
 
     running = True
     while running:

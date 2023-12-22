@@ -1,4 +1,4 @@
-import pygame.mouse
+import pygame
 
 
 class State:
@@ -17,10 +17,8 @@ class State:
 
 class StateSettingPos(State):
     def idle(self, screen):
-        RED = 255, 0, 0
-        r = 5
-        x, y = pygame.mouse.get_pos()
-        pygame.draw.circle(screen, RED, (x, y), r)
+        self.context.ball.pos = pygame.mouse.get_pos()
+        self.context.ball.draw_body(screen)
 
     def click(self, screen):
         self.context.next_state()
@@ -40,9 +38,9 @@ class StateSettingSpeed(State):
         print(f"yolo on {screen}")
 
 
-
 class Context:
-    def __init__(self):
+    def __init__(self, ball):
+        self.ball = ball
         self.state = StateSettingPos(self)
 
     def idle(self, screen):

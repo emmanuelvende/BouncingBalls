@@ -21,6 +21,7 @@ class StateSettingPos(State):
         self.context.ball.draw_body(screen)
 
     def click(self, screen):
+        self.idle(screen)
         self.context.next_state()
 
     def next_state(self):
@@ -29,10 +30,7 @@ class StateSettingPos(State):
 
 class StateSettingSpeed(State):
     def idle(self, screen):
-        YELLOW = (255, 255, 0)
-        r = 5
-        x, y = pygame.mouse.get_pos()
-        pygame.draw.circle(screen, YELLOW, (x, y), r)
+        self.context.ball.set_speed(screen, pygame.mouse.get_pos())
 
     def click(self, screen):
         print(f"yolo on {screen}")

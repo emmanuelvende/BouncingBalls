@@ -14,6 +14,7 @@ def main():
     context = statem.Context(the_ball)
 
     running = True
+    tick_delay = 0.0
     while running:
         screen.blit(decor_surf, (0, 0))
 
@@ -23,11 +24,11 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 context.click(screen)
 
-        context.idle(screen)
+        context.idle(screen, tick_delay)
 
         pygame.display.flip()
 
-        clock.tick(60)
+        tick_delay = clock.tick(60)
 
     pygame.quit()
 
